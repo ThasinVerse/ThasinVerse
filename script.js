@@ -649,7 +649,6 @@ function createClassCard(
 
 }
 
-
 /* =========================================================
    SELECT CLASS
 ========================================================= */
@@ -662,26 +661,19 @@ function selectClass(classKey) {
 
     const data = educationData[classKey];
 
-
     if (!data) return;
 
-
-    if (data.type === "direct") {
-
-        showDirectAcademicVideos(classKey);
-
-        return;
-
-    }
-
-
+    // সব class এর জন্যই Subject Select page দেখাবে
     showSchoolSubjects(classKey);
 
 }
 
-
 /* =========================================================
    CLASS 6 / 7 / 8 SUBJECT SELECTION
+========================================================= */
+
+/* =========================================================
+   SUBJECT SELECTION PAGE (সব class এর জন্য)
 ========================================================= */
 
 function showSchoolSubjects(classKey) {
@@ -692,6 +684,18 @@ function showSchoolSubjects(classKey) {
 
     const container =
         document.getElementById("classContent");
+
+
+    // Class type অনুযায়ী text আলাদা
+    const isExam = data.type === "direct";
+
+    const headingText = isExam
+        ? "Subject নির্বাচন করো"
+        : "Subject Select করো";
+
+    const descriptionText = isExam
+        ? `${data.subtitle} — একটি subject নির্বাচন করো, তারপর সেই subject এর ভিডিও দেখতে পারবে।`
+        : `${data.subtitle} এর জন্য একটি subject নির্বাচন করো।`;
 
 
     container.innerHTML = `
@@ -713,9 +717,9 @@ function showSchoolSubjects(classKey) {
 
         <div class="selection-header reveal">
 
-            <div class="selection-icon">
+            <div class="selection-icon ${isExam ? 'exam' : ''}">
 
-                <i class="fa-solid fa-book-open"></i>
+                <i class="fa-solid ${isExam ? 'fa-graduation-cap' : 'fa-book-open'}"></i>
 
             </div>
 
@@ -727,11 +731,11 @@ function showSchoolSubjects(classKey) {
                 </span>
 
                 <h2>
-                    Subject Select করো
+                    ${headingText}
                 </h2>
 
                 <p>
-                    ${data.subtitle} এর জন্য একটি subject নির্বাচন করো।
+                    ${descriptionText}
                 </p>
 
             </div>
