@@ -1,6 +1,6 @@
 /* =========================================================
    THASINVERSE PREMIUM LEARNING ENGINE
-   Version: 3.1 (Fixed Classes Loading)
+   Version: 3.2 (Fixed Classes Loading + Unified Subject Flow)
 ========================================================= */
 
 
@@ -557,7 +557,7 @@ function showClasses() {
                     "Secondary School Certificate",
                     "exam",
                     "fa-graduation-cap",
-                    "Explore Classes"
+                    "Subject Select"
                 )}
 
 
@@ -567,7 +567,7 @@ function showClasses() {
                     "Higher Secondary Certificate",
                     "exam",
                     "fa-user-graduate",
-                    "Explore Classes"
+                    "Subject Select"
                 )}
 
             </div>
@@ -649,8 +649,10 @@ function createClassCard(
 
 }
 
+
 /* =========================================================
    SELECT CLASS
+   (সব class এর জন্য একই flow - Subject Select page)
 ========================================================= */
 
 function selectClass(classKey) {
@@ -661,19 +663,20 @@ function selectClass(classKey) {
 
     const data = educationData[classKey];
 
+
     if (!data) return;
 
+
     // সব class এর জন্যই Subject Select page দেখাবে
+    // SSC/HSC ও এখন Class 6/7/8 এর মতো same flow follow করে
     showSchoolSubjects(classKey);
 
 }
 
-/* =========================================================
-   CLASS 6 / 7 / 8 SUBJECT SELECTION
-========================================================= */
 
 /* =========================================================
-   SUBJECT SELECTION PAGE (সব class এর জন্য)
+   SUBJECT SELECTION PAGE
+   (সব class এর জন্য - Class 6/7/8, SSC, HSC)
 ========================================================= */
 
 function showSchoolSubjects(classKey) {
@@ -686,7 +689,7 @@ function showSchoolSubjects(classKey) {
         document.getElementById("classContent");
 
 
-    // Class type অনুযায়ী text আলাদা
+    // Class type অনুযায়ী text এবং icon আলাদা
     const isExam = data.type === "direct";
 
     const headingText = isExam
@@ -696,6 +699,14 @@ function showSchoolSubjects(classKey) {
     const descriptionText = isExam
         ? `${data.subtitle} — একটি subject নির্বাচন করো, তারপর সেই subject এর ভিডিও দেখতে পারবে।`
         : `${data.subtitle} এর জন্য একটি subject নির্বাচন করো।`;
+
+    const iconClass = isExam
+        ? "fa-graduation-cap"
+        : "fa-book-open";
+
+    const iconExtraClass = isExam
+        ? " exam"
+        : "";
 
 
     container.innerHTML = `
@@ -717,9 +728,9 @@ function showSchoolSubjects(classKey) {
 
         <div class="selection-header reveal">
 
-            <div class="selection-icon ${isExam ? 'exam' : ''}">
+            <div class="selection-icon${iconExtraClass}">
 
-                <i class="fa-solid ${isExam ? 'fa-graduation-cap' : 'fa-book-open'}"></i>
+                <i class="fa-solid ${iconClass}"></i>
 
             </div>
 
@@ -827,6 +838,7 @@ function createSubjectCard(
 
 /* =========================================================
    OPEN SCHOOL SUBJECT
+   (সব class এর জন্য কাজ করবে - Class 6/7/8, SSC, HSC)
 ========================================================= */
 
 function openSchoolSubject(
@@ -851,191 +863,6 @@ function openSchoolSubject(
         data.videos,
         true
     );
-
-}
-
-
-/* =========================================================
-   SSC / HSC DIRECT VIEW
-========================================================= */
-
-function showDirectAcademicVideos(
-    classKey
-) {
-
-    currentLevel = "direct";
-
-    selectedClass = classKey;
-
-    const data =
-        educationData[classKey];
-
-
-    const container =
-        document.getElementById("classContent");
-
-
-    container.innerHTML = `
-
-        <div class="inner-navigation">
-
-            <button
-                onclick="showClasses()"
-                class="back-button sound-btn">
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-                All Classes
-
-            </button>
-
-        </div>
-
-
-        <div class="selection-header reveal">
-
-            <div class="selection-icon exam">
-
-                <i class="fa-solid fa-graduation-cap"></i>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    ${data.title}
-                </span>
-
-                <h2>
-                    Academic Video Library
-                </h2>
-
-                <p>
-                    ${data.subtitle} — subject অনুযায়ী
-                    ভিডিওগুলো সরাসরি নিচে দেওয়া হলো।
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="academic-subject-list">
-
-            ${Object.entries(data.subjects)
-                .map(([subject, info]) =>
-                    createAcademicSubjectBlock(
-                        subject,
-                        info
-                    )
-                )
-                .join("")}
-
-        </div>
-
-    `;
-
-
-    activateRevealElements();
-
-}
-
-
-/* =========================================================
-   ACADEMIC SUBJECT BLOCK
-========================================================= */
-
-function createAcademicSubjectBlock(
-    subject,
-    info
-) {
-
-    const videos =
-        info.videos || [];
-
-
-    return `
-
-        <section class="academic-block reveal">
-
-            <div class="academic-block-header">
-
-                <div class="academic-subject-icon">
-
-                    <i class="fa-solid ${info.icon}"></i>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        SUBJECT
-                    </span>
-
-                    <h3>
-                        ${subject}
-                    </h3>
-
-                </div>
-
-
-                <div class="video-count">
-
-                    ${videos.length}
-
-                    <small>
-                        VIDEOS
-                    </small>
-
-                </div>
-
-            </div>
-
-
-            ${
-                videos.length
-                ? `
-
-                    <div class="video-grid">
-
-                        ${videos
-                            .map(video =>
-                                createVideoCard(video)
-                            )
-                            .join("")}
-
-                    </div>
-
-                `
-                : `
-
-                    <div class="empty-video">
-
-                        <div class="empty-icon">
-
-                            <i class="fa-solid fa-hourglass-half"></i>
-
-                        </div>
-
-                        <h4>
-                            No video available yet
-                        </h4>
-
-                        <p>
-                            এই subject-এর নতুন class
-                            শিগগিরই যুক্ত করা হবে।
-                        </p>
-
-                    </div>
-
-                `
-            }
-
-        </section>
-
-    `;
 
 }
 
@@ -1152,10 +979,7 @@ function showVideoList(
 
 /* =========================================================
    VIDEO CARD
-========================================================= */
-
-/* =========================================================
-   VIDEO CARD
+   (Modal এ video দেখায় - direct YouTube redirect নয়)
 ========================================================= */
 
 function createVideoCard(video) {
@@ -1244,6 +1068,7 @@ function createVideoCard(video) {
 
 }
 
+
 /* =========================================================
    YOUTUBE ID
 ========================================================= */
@@ -1286,7 +1111,7 @@ function getYoutubeId(url) {
 
 
 /* =========================================================
-   OPTIONAL VIDEO MODAL
+   VIDEO MODAL
 ========================================================= */
 
 function openVideoModal(url) {
