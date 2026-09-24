@@ -1150,6 +1150,10 @@ function showVideoList(
    VIDEO CARD
 ========================================================= */
 
+/* =========================================================
+   VIDEO CARD
+========================================================= */
+
 function createVideoCard(video) {
 
     const videoId =
@@ -1164,13 +1168,13 @@ function createVideoCard(video) {
 
     return `
 
-        <a
-            href="${video.url}"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div
+            onclick="openVideoModal('${video.url}')"
             class="video-card sound-btn"
             data-sound="success"
-            aria-label="Open YouTube video">
+            role="button"
+            tabindex="0"
+            aria-label="Play video: ${escapeHTML(video.title)}">
 
             <div class="video-thumbnail">
 
@@ -1221,21 +1225,20 @@ function createVideoCard(video) {
                 <div class="watch-row">
 
                     <span>
-                        Watch on YouTube
+                        Watch on Site
                     </span>
 
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <i class="fa-solid fa-play"></i>
 
                 </div>
 
             </div>
 
-        </a>
+        </div>
 
     `;
 
 }
-
 
 /* =========================================================
    YOUTUBE ID
