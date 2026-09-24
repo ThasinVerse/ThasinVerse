@@ -4678,3 +4678,57 @@ a {
     }
 
 }
+/* =========================================================
+   PC BROWSER - DISABLE CONTINUOUS ANIMATIONS
+   (Mobile এ আগেই off, PC তে lag কমাতে)
+========================================================= */
+
+@media (min-width: 701px) {
+
+    /* Background dots movement বন্ধ */
+    .ambient-background::before {
+        animation: none !important;
+    }
+
+    /* Aurora blobs movement বন্ধ */
+    .aurora {
+        animation: none !important;
+    }
+
+    /* Floating orbs movement বন্ধ */
+    .floating-orb {
+        animation: none !important;
+    }
+
+    /* Badge dot pulse বন্ধ */
+    .badge-dot {
+        animation: none !important;
+    }
+
+    /* Logo card floating বন্ধ */
+    .logo-card {
+        animation: none !important;
+    }
+
+    /* Logo glow pulse বন্ধ */
+    .logo-glow {
+        animation: none !important;
+    }
+
+    /* Orbit rotation বন্ধ */
+    .hero-orbit.orbit-c {
+        animation: none !important;
+    }
+
+    /* Floating chips movement বন্ধ */
+    .floating-chip {
+        animation: none !important;
+    }
+
+    /* Founder rings rotation বন্ধ */
+    .founder-ring.ring-one,
+    .founder-ring.ring-two {
+        animation: none !important;
+    }
+
+}
