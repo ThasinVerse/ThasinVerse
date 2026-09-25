@@ -1,6 +1,6 @@
 /* =========================================================
    THASINVERSE PREMIUM LEARNING ENGINE
-   Version: 4.0 (Chapter-wise Class System)
+   Version: 4.2 (All SSC Subjects Chapter-wise)
 ========================================================= */
 
 
@@ -110,11 +110,20 @@ const educationData = {
         }
     },
 
+
+    /* =====================================================
+       SSC - ALL SUBJECTS CHAPTER-WISE
+    ===================================================== */
+
     "ssc": {
         title: "SSC",
         subtitle: "Secondary School Certificate",
         type: "exam",
         subjects: {
+
+            /* -------------------------------------------------
+               PHYSICS - 13 Chapters
+            ------------------------------------------------- */
             "Physics": {
                 icon: "fa-atom",
                 chapters: {
@@ -215,46 +224,292 @@ const educationData = {
                     }
                 }
             },
+
+
+            /* -------------------------------------------------
+               CHEMISTRY - 12 Chapters
+            ------------------------------------------------- */
             "Chemistry": {
                 icon: "fa-flask",
-                videos: [
-                    {
-                        title: "বোহারের ফর্মুলা mvr = nh/2π কীভাবে এলো?",
-                        url: "https://youtu.be/SGTDSkbarSk"
+                chapters: {
+                    "অধ্যায় ১: রসায়নের ধারণা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
                     },
-                    {
-                        title: "১ মোল আসলে কত? | অ্যাভোগাড্রোর সংখ্যা 6.022×10²³",
-                        url: "https://youtu.be/Q8nRvIInk-4"
+                    "অধ্যায় ২: পদার্থের অবস্থা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৩: পদার্থের গঠন": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "বোহারের ফর্মুলা mvr = nh/2π কীভাবে এলো?",
+                                url: "https://youtu.be/SGTDSkbarSk"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৪: পর্যায় সারণি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৫: রাসায়নিক বন্ধন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "১ মোল আসলে কত? | অ্যাভোগাড্রোর সংখ্যা 6.022×10²³ সহজ ব্যাখ্যা",
+                                url: "https://youtu.be/Q8nRvIInk-4"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৭: রাসায়নিক বিক্রিয়া": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৮: রসায়ন ও শক্তি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৯: এসিড-ক্ষারক সমতা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১০: খনিজ সম্পদ: ধাতু ও অধাতু": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১২: আমাদের জীবনে রসায়ন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
                     }
-                ]
+                }
             },
+
+
+            /* -------------------------------------------------
+               HIGHER MATH - 14 Chapters
+            ------------------------------------------------- */
             "Higher Math": {
                 icon: "fa-square-root-variable",
-                videos: [
-                    {
-                        title: "🔍 অসীম সংখ্যা কি আসলেই অসীম?",
-                        url: "https://youtu.be/P07K4MigUXk"
+                chapters: {
+                    "অধ্যায় ১: সেট ও ফাংশন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
                     },
-                    {
-                        title: "📘 SSC Math: অসীম সংখ্যা শেষবারের মতো ক্লিয়ার করো!",
-                        url: "https://youtu.be/bgMRUmhwRyI"
+                    "অধ্যায় ২: বীজগাণিতিক রাশি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
                     },
-                    {
-                        title: "বৈজ্ঞানিক পদ্ধতিতে সংখ্যার প্রকাশ",
-                        url: "https://youtu.be/aafAMZiQGkQ"
+                    "অধ্যায় ৩: জ্যামিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৪: জ্যামিতিক অঙ্কন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৫: সমীকরণ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৬: অসমতা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৭: অসীম ধারা": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "🔍 অসীম সংখ্যা কি আসলেই অসীম?",
+                                url: "https://youtu.be/P07K4MigUXk"
+                            },
+                            {
+                                title: "📘 SSC Math: অসীম সংখ্যা শেষবারের মতো ক্লিয়ার করো!",
+                                url: "https://youtu.be/bgMRUmhwRyI"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৮: ত্রিকোণমিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৯: সূচকীয় ও লগারিদমীয় ফাংশন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১০: দ্বিপদী বিস্তৃতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১১: স্থানাঙ্ক জ্যামিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১২: সমতলীয় ভেক্টর": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৩: ঘন জ্যামিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৪: সম্ভাবনা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
                     }
-                ]
+                }
             },
+
+
+            /* -------------------------------------------------
+               GENERAL MATH - 17 Chapters
+            ------------------------------------------------- */
             "General Math": {
                 icon: "fa-calculator",
-                videos: []
+                chapters: {
+                    "অধ্যায় ১: বাস্তব সংখ্যা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ২: সেট ও ফাংশন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৩: বীজগাণিতিক রাশি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৪: সূচক ও লগারিদম": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "বৈজ্ঞানিক পদ্ধতিতে সংখ্যার প্রকাশ | সহজভাবে ব্যাখ্যা",
+                                url: "https://youtu.be/aafAMZiQGkQ"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৫: এক চলকবিশিষ্ট সমীকরণ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৬: রেখা, কোণ ও ত্রিভুজ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৭: ব্যবহারিক জ্যামিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৮: বৃত্ত": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৯: ত্রিকোণমিতিক অনুপাত": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১০: দূরত্ব ও উচ্চতা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১১: বীজগাণিতিক অনুপাত ও সমানুপাত": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১২: দুই চলকবিশিষ্ট সরল সহ-সমীকরণ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৩: সসীম ধারা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৪: অনুপাত, সদৃশতা ও প্রতিসমতা": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৫: ক্ষেত্রফল সম্পর্কিত উপপাদ্য ও সম্পাদ্য": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৬: পরিমিতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৭: পরিসংখ্যান": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    }
+                }
             },
+
+
+            /* -------------------------------------------------
+               BIOLOGY - Still videos array (no chapter data yet)
+            ------------------------------------------------- */
             "Biology": {
                 icon: "fa-dna",
                 videos: []
             }
+
         }
     },
+
+
+    /* =====================================================
+       HSC - Still videos array (no chapter data yet)
+    ===================================================== */
 
     "hsc": {
         title: "HSC",
@@ -457,7 +712,7 @@ function createClassCard(key, title, subtitle, type, icon, action) {
 
 
 /* =========================================================
-   SELECT CLASS - সব class এর জন্য Subject Select page
+   SELECT CLASS
 ========================================================= */
 
 function selectClass(classKey) {
@@ -472,7 +727,7 @@ function selectClass(classKey) {
 
 
 /* =========================================================
-   SUBJECT SELECTION PAGE - সব class এর জন্য
+   SUBJECT SELECTION PAGE
 ========================================================= */
 
 function showSubjectSelection(classKey) {
@@ -526,19 +781,17 @@ function showSubjectSelection(classKey) {
 
 
 /* =========================================================
-   SUBJECT CARD - Smart count (chapters or videos)
+   SUBJECT CARD - Smart count
 ========================================================= */
 
 function createSubjectCard(classKey, subject, info) {
     let count = 0;
 
     if (info.chapters) {
-        // Chapter-wise structure - সব chapter এর সব video count করো
         Object.values(info.chapters).forEach(chapter => {
             count += chapter.academic.length + chapter.basic.length + chapter.oneshot.length;
         });
     } else if (info.videos) {
-        // Direct videos
         count = info.videos.length;
     }
 
@@ -562,8 +815,6 @@ function createSubjectCard(classKey, subject, info) {
 
 /* =========================================================
    OPEN SUBJECT - Smart routing
-   - Chapter structure থাকলে → Chapter List
-   - Videos array থাকলে → সরাসরি Video List
 ========================================================= */
 
 function openSubject(classKey, subject) {
@@ -574,10 +825,8 @@ function openSubject(classKey, subject) {
     const data = educationData[classKey].subjects[subject];
 
     if (data.chapters) {
-        // Chapter-wise structure → Chapter List দেখাও
         showChapterList(classKey, subject);
     } else {
-        // Direct videos → Video List দেখাও
         const classTitle = educationData[classKey].title;
         const classSubtitle = educationData[classKey].subtitle;
 
@@ -592,7 +841,7 @@ function openSubject(classKey, subject) {
 
 
 /* =========================================================
-   SHOW CHAPTER LIST - Subject এর সব chapter দেখাবে
+   SHOW CHAPTER LIST
 ========================================================= */
 
 function showChapterList(classKey, subject) {
@@ -667,7 +916,7 @@ function createChapterCard(classKey, subject, chapter, info) {
 
 
 /* =========================================================
-   SHOW CLASS TYPE OPTIONS - Academic/Basic/Oneshot
+   SHOW CLASS TYPE OPTIONS
 ========================================================= */
 
 function showClassTypeOptions(classKey, subject, chapter) {
@@ -733,7 +982,7 @@ function createClassTypeCard(type, title, icon, description, videoCount) {
 
 
 /* =========================================================
-   OPEN CLASS TYPE - Selected type এর videos দেখাবে
+   OPEN CLASS TYPE
 ========================================================= */
 
 function openClassType(classType) {
@@ -758,7 +1007,7 @@ function openClassType(classType) {
 
 
 /* =========================================================
-   VIDEO LIST - Smart back navigation
+   VIDEO LIST
 ========================================================= */
 
 function showVideoList(title, subtitle, videos, backFunction) {
@@ -766,7 +1015,6 @@ function showVideoList(title, subtitle, videos, backFunction) {
 
     const container = document.getElementById("classContent");
 
-    // Back button - কোথায় ফিরবে
     let backAction;
     if (backFunction === "showClassTypeOptions") {
         backAction = `showClassTypeOptions('${selectedClass}', '${escapeQuotes(selectedSubject)}', '${escapeQuotes(selectedChapter)}')`;
@@ -813,7 +1061,7 @@ function showVideoList(title, subtitle, videos, backFunction) {
 
 
 /* =========================================================
-   VIDEO CARD - Modal এ video দেখায়
+   VIDEO CARD
 ========================================================= */
 
 function createVideoCard(video) {
