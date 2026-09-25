@@ -466,64 +466,10 @@ function setupSoundSystem() {
         toggle.addEventListener("click", function() {
             soundEnabled = !soundEnabled;
             updateSoundBtn();
-            if (soundEnabled) playUISound("success");
         });
     }
-    
-    document.addEventListener("click", function(e) {
-        var el = e.target.closest(".sound-btn");
-        if (!el || el.id === "soundToggle") return;
-        var soundType = el.dataset.sound || "click";
-        playUISound(soundType);
-        createRipple(el, e);  // ← এই line টা add করো
-    });
 }
-    
-    document.addEventListener("click", function(e) {
-        var el = e.target.closest(".sound-btn");
-        if (!el || el.id === "soundToggle") return;
-        var soundType = el.dataset.sound || "click";
-        playUISound(soundType);
-    });
-}
-function playUISound(type) {
-    if (!soundEnabled) return;
-    if (!type) type = "click";
-    
-    try {
-        if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioContext.state === "suspended") {
-            audioContext.resume();
-        }
-        
-        var now = audioContext.currentTime;
-        var osc = audioContext.createOscillator();
-        var gn = audioContext.createGain();
-        var freq = 440;
-        var dur = 0.12;
-        
-        if (type === "success") { freq = 680; dur = 0.18; }
-        else if (type === "open") { freq = 560; dur = 0.14; }
-        else if (type === "soft") { freq = 380; dur = 0.08; }
-        
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(freq, now);
-        osc.frequency.exponentialRampToValueAtTime(freq * 1.25, now + dur);
-        
-        gn.gain.setValueAtTime(0.0001, now);
-        gn.gain.exponentialRampToValueAtTime(0.045, now + 0.015);
-        gn.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-        
-        osc.connect(gn);
-        gn.connect(audioContext.destination);
-        osc.start(now);
-        osc.stop(now + dur + 0.02);
-    } catch (err) {
-        console.log("Audio unavailable");
-    }
-}
+
 function updateSoundBtn() {
     var b = document.getElementById("soundToggle");
     if (!b) return;
@@ -533,28 +479,7 @@ function updateSoundBtn() {
         b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i><span>Muted</span>';
     }
 }
-function createRipple(element, event) {
-    if (element.classList.contains("class-card") || 
-        element.classList.contains("subject-card") || 
-        element.classList.contains("video-card") ||
-        element.classList.contains("chapter-card") ||
-        element.classList.contains("class-type-card")) {
-        return;
-    }
-    
-    var rect = element.getBoundingClientRect();
-    var ripple = document.createElement("span");
-    var size = Math.max(rect.width, rect.height);
-    
-    ripple.className = "click-ripple";
-    ripple.style.width = size + "px";
-    ripple.style.height = size + "px";
-    ripple.style.left = (event.clientX - rect.left - size / 2) + "px";
-    ripple.style.top = (event.clientY - rect.top - size / 2) + "px";
-    
-    element.appendChild(ripple);
-    setTimeout(function() { ripple.remove(); }, 650);
-}
+
 function setupMobileMenu() {
     var btn = document.getElementById("mobileMenuButton");
     var menu = document.getElementById("mobileMenu");
