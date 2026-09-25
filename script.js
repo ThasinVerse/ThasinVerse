@@ -615,3 +615,23 @@ if (vmEl) {
         if (e.target.classList.contains("video-modal")) closeVideoModal();
     });
 }
+// SOUND FIX - সব button এ automatically sound-btn class add করবে
+(function() {
+    var allButtons = document.querySelectorAll(
+        "button, .premium-button, .nav-link, .brand, .youtube-nav, .sound-control, .floating-youtube, .back-to-top, .modal-close, .footer-socials a, .mobile-menu a, .class-card, .subject-card, .video-card, .chapter-card, .class-type-card, .back-button"
+    );
+    
+    for (var i = 0; i < allButtons.length; i++) {
+        var el = allButtons[i];
+        if (!el.classList.contains("sound-btn")) {
+            el.classList.add("sound-btn");
+        }
+        if (!el.dataset.sound) {
+            if (el.classList.contains("premium-button") || el.classList.contains("youtube-nav")) {
+                el.dataset.sound = "success";
+            } else {
+                el.dataset.sound = "soft";
+            }
+        }
+    }
+})();
