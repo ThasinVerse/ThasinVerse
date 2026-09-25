@@ -5015,20 +5015,12 @@ a {
 }
 
 @keyframes loadingSpin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes loadingPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.08);
-        opacity: 0.85;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.85; }
 }
 
 .loading-text {
@@ -5072,28 +5064,12 @@ a {
     30% { width: 40%; }
     60% { width: 70%; }
     100% { width: 100%; }
-}
 
 
 /* =========================================================
-   SCROLL REVEAL ANIMATIONS (Different Types)
+   SCROLL REVEAL - DIFFERENT TYPES
 ========================================================= */
 
-/* Default - Fade Up */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition:
-        opacity 0.8s cubic-bezier(.2,.8,.2,1),
-        transform 0.8s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Fade Left */
 .reveal-left {
     opacity: 0;
     transform: translateX(-50px);
@@ -5107,7 +5083,6 @@ a {
     transform: translateX(0);
 }
 
-/* Fade Right */
 .reveal-right {
     opacity: 0;
     transform: translateX(50px);
@@ -5121,7 +5096,6 @@ a {
     transform: translateX(0);
 }
 
-/* Scale Up */
 .reveal-scale {
     opacity: 0;
     transform: scale(0.85);
@@ -5135,7 +5109,6 @@ a {
     transform: scale(1);
 }
 
-/* Stagger delay for grid items */
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
