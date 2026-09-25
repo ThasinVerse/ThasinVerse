@@ -475,6 +475,15 @@ function setupSoundSystem() {
         if (!el || el.id === "soundToggle") return;
         var soundType = el.dataset.sound || "click";
         playUISound(soundType);
+        createRipple(el, e);  // ← এই line টা add করো
+    });
+}
+    
+    document.addEventListener("click", function(e) {
+        var el = e.target.closest(".sound-btn");
+        if (!el || el.id === "soundToggle") return;
+        var soundType = el.dataset.sound || "click";
+        playUISound(soundType);
     });
 }
 function playUISound(type) {
@@ -524,7 +533,28 @@ function updateSoundBtn() {
         b.innerHTML = '<i class="fa-solid fa-volume-xmark"></i><span>Muted</span>';
     }
 }
-
+function createRipple(element, event) {
+    if (element.classList.contains("class-card") || 
+        element.classList.contains("subject-card") || 
+        element.classList.contains("video-card") ||
+        element.classList.contains("chapter-card") ||
+        element.classList.contains("class-type-card")) {
+        return;
+    }
+    
+    var rect = element.getBoundingClientRect();
+    var ripple = document.createElement("span");
+    var size = Math.max(rect.width, rect.height);
+    
+    ripple.className = "click-ripple";
+    ripple.style.width = size + "px";
+    ripple.style.height = size + "px";
+    ripple.style.left = (event.clientX - rect.left - size / 2) + "px";
+    ripple.style.top = (event.clientY - rect.top - size / 2) + "px";
+    
+    element.appendChild(ripple);
+    setTimeout(function() { ripple.remove(); }, 650);
+}
 function setupMobileMenu() {
     var btn = document.getElementById("mobileMenuButton");
     var menu = document.getElementById("mobileMenu");
