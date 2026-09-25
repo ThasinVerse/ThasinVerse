@@ -1,4 +1,3 @@
---- script.js (原始)
 /* =========================================================
    THASINVERSE PREMIUM LEARNING ENGINE
    Version: 5.0 (Loading Screen + Enhanced Scroll Animations)
@@ -600,36 +599,26 @@ function initializeWebsite() {
 
 
 /* =========================================================
-   LOADING SCREEN
+   LOADING SCREEN (FIXED)
 ========================================================= */
 
 function setupLoadingScreen() {
-    const loadingScreen = document.getElementById("loadingScreen");
+    var loadingScreen = document.getElementById("loadingScreen");
 
     if (!loadingScreen) return;
 
-    const minLoadTime = 2500;
+    // সরাসরি 2.5 second পর hide হবে
+    setTimeout(function() {
+        loadingScreen.classList.add("hidden");
 
-    window.addEventListener("load", () => {
-        setTimeout(() => {
-            loadingScreen.classList.add("hidden");
-
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 800);
-        }, minLoadTime);
-    });
-
-    if (document.readyState === "complete") {
-        setTimeout(() => {
-            loadingScreen.classList.add("hidden");
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 800);
-        }, minLoadTime);
-    }
+        // Animation শেষে DOM থেকে remove
+        setTimeout(function() {
+            if (loadingScreen.parentNode) {
+                loadingScreen.parentNode.removeChild(loadingScreen);
+            }
+        }, 900);
+    }, 2500);
 }
-
 
 /* =========================================================
    HOME
