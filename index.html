@@ -250,5 +250,72 @@
 </a>
 
 <script src="script.js"></script>
+    <!-- SOUND FIX - সব button এ click করলে sound হবে -->
+<script>
+(function() {
+    // Audio context তৈরি করো
+    var audioCtx = null;
+    var sndEnabled = true;
+
+    function getAudioCtx() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        return audioCtx;
+    }
+
+    function playSound(type) {
+        if (!sndEnabled) return;
+        try {
+            var ctx = getAudioCtx();
+            if (ctx.state === "suspended") ctx.resume();
+
+            var now = ctx.currentTime;
+            var osc = ctx.createOscillator();
+            var gain = ctx.createGain();
+            var freq = 440;
+            var dur = 0.12;
+
+            if (type === "success") { freq = 680; dur = 0.18; }
+            else if (type === "open") { freq = 560; dur = 0.14; }
+            else if (type === "soft") { freq = 380; dur = 0.08; }
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, now);
+            osc.frequency.exponentialRampToValueAtTime(freq * 1.25, now + dur);
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.045, now + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + dur + 0.02);
+        } catch (err) {}
+    }
+
+    // সব click event ধরো
+    document.addEventListener("click", function(e) {
+        var el = e.target.closest(".sound-btn");
+        if (!el) return;
+        if (el.id === "soundToggle") {
+            sndEnabled = !sndEnabled;
+            var btn = document.getElementById("soundToggle");
+            if (btn) {
+                if (sndEnabled) {
+                    btn.innerHTML = '<i class="fa-solid fa-volume-high"></i><span>Sound</span>';
+                } else {
+                    btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i><span>Muted</span>';
+                }
+            }
+            if (sndEnabled) playSound("success");
+            return;
+        }
+        var sndType = el.dataset.sound || "click";
+        playSound(sndType);
+    });
+})();
+</script>
 </body>
 </html>
