@@ -1,6 +1,6 @@
 /* =========================================================
    THASINVERSE PREMIUM LEARNING ENGINE
-   Version: 3.3 (Fixed SSC/HSC Subject Selection)
+   Version: 4.0 (Chapter-wise Class System)
 ========================================================= */
 
 
@@ -115,6 +115,106 @@ const educationData = {
         subtitle: "Secondary School Certificate",
         type: "exam",
         subjects: {
+            "Physics": {
+                icon: "fa-atom",
+                chapters: {
+                    "অধ্যায় ১: ভৌত রাশি এবং পরিমাপ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ২: গতি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৩: বল": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৪: কাজ, ক্ষমতা ও শক্তি": {
+                        academic: [],
+                        basic: [],
+                        oneshot: [
+                            {
+                                title: "কাজ, ক্ষমতা ও শক্তি Final shot! 😳 | কাজ, ক্ষমতা ও শক্তি Oneshot | SSC 2026",
+                                url: "https://youtu.be/XrkGCqvZhcc"
+                            }
+                        ]
+                    },
+                    "অধ্যায় ৫: পদার্থের অবস্থা ও চাপ": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "🔹 ৭৬ cm পারদ = ১ atm কেন? | পারদের চাপ | Atmospheric Pressure",
+                                url: "https://youtu.be/KtaCP4xhFrA"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৬: বস্তুর ওপর তাপের প্রভাব": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৭: তরঙ্গ ও শব্দ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: [
+                            {
+                                title: "ফিজিক্স ৭ অধ্যায়ের Final shot! 😳 | তরঙ্গ ও শব্দ Oneshot | SSC 2026",
+                                url: "https://youtu.be/GbkZK74Hq1M"
+                            }
+                        ]
+                    },
+                    "অধ্যায় ৮: আলোর প্রতিফলন": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ৯: আলোর প্রতিসরণ": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১০: স্থির তড়িৎ": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "💭 বিভব পার্থক্য বুঝতে কি এখনো কষ্ট হয়?",
+                                url: "https://youtu.be/km6IZuxZXyQ"
+                            }
+                        ],
+                        oneshot: [
+                            {
+                                title: "স্থির বিদ্যুৎ Final shot! 😳 | স্থির বিদ্যুৎ Oneshot | SSC Physics chapter 10",
+                                url: "https://youtu.be/ba2QQRdjl4s"
+                            }
+                        ]
+                    },
+                    "অধ্যায় ১১: চল তড়িৎ": {
+                        academic: [],
+                        basic: [
+                            {
+                                title: "💭 বিভব পার্থক্য বুঝতে কি এখনো কষ্ট হয়?",
+                                url: "https://youtu.be/km6IZuxZXyQ"
+                            }
+                        ],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১২: বিদ্যুতের চৌম্বক ক্রিয়া": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    },
+                    "অধ্যায় ১৩: আধুনিক পদার্থবিজ্ঞান ও ইলেকট্রনিকস": {
+                        academic: [],
+                        basic: [],
+                        oneshot: []
+                    }
+                }
+            },
             "Chemistry": {
                 icon: "fa-flask",
                 videos: [
@@ -148,31 +248,6 @@ const educationData = {
             "General Math": {
                 icon: "fa-calculator",
                 videos: []
-            },
-            "Physics": {
-                icon: "fa-atom",
-                videos: [
-                    {
-                        title: "🔹 ৭৬ cm পারদ = ১ atm কেন? | Atmospheric Pressure",
-                        url: "https://youtu.be/KtaCP4xhFrA"
-                    },
-                    {
-                        title: "ফিজিক্স ৭ অধ্যায়ের Final Shot! | তরঙ্গ ও শব্দ Oneshot",
-                        url: "https://youtu.be/GbkZK74Hq1M"
-                    },
-                    {
-                        title: "কাজ, ক্ষমতা ও শক্তি Final Shot!",
-                        url: "https://youtu.be/XrkGCqvZhcc"
-                    },
-                    {
-                        title: "স্থির বিদ্যুৎ Final Shot!",
-                        url: "https://youtu.be/ba2QQRdjl4s"
-                    },
-                    {
-                        title: "💭 বিভব পার্থক্য বুঝতে কি এখনো কষ্ট হয়?",
-                        url: "https://youtu.be/km6IZuxZXyQ"
-                    }
-                ]
             },
             "Biology": {
                 icon: "fa-dna",
@@ -259,6 +334,7 @@ const educationData = {
 let currentLevel = "home";
 let selectedClass = null;
 let selectedSubject = null;
+let selectedChapter = null;
 let soundEnabled = true;
 let audioContext = null;
 
@@ -322,6 +398,7 @@ function showClasses() {
     currentLevel = "classes";
     selectedClass = null;
     selectedSubject = null;
+    selectedChapter = null;
 
     const container = document.getElementById("classContent");
 
@@ -390,7 +467,6 @@ function selectClass(classKey) {
     const data = educationData[classKey];
     if (!data) return;
 
-    // সব class (Class 6/7/8, SSC, HSC) এর জন্য Subject Select page
     showSubjectSelection(classKey);
 }
 
@@ -405,17 +481,14 @@ function showSubjectSelection(classKey) {
     const data = educationData[classKey];
     const container = document.getElementById("classContent");
 
-    // Class type অনুযায়ী text এবং icon
     let headingText, descriptionText, iconClass, iconExtraClass;
 
     if (data.type === "exam") {
-        // SSC/HSC এর জন্য
         headingText = "Subject নির্বাচন করো";
         descriptionText = `${data.subtitle} — একটি subject নির্বাচন করো, তারপর সেই subject এর ভিডিও দেখতে পারবে।`;
         iconClass = "fa-graduation-cap";
         iconExtraClass = " exam";
     } else {
-        // Class 6/7/8 এর জন্য
         headingText = "Subject Select করো";
         descriptionText = `${data.subtitle} এর জন্য একটি subject নির্বাচন করো।`;
         iconClass = "fa-book-open";
@@ -453,11 +526,21 @@ function showSubjectSelection(classKey) {
 
 
 /* =========================================================
-   SUBJECT CARD
+   SUBJECT CARD - Smart count (chapters or videos)
 ========================================================= */
 
 function createSubjectCard(classKey, subject, info) {
-    const count = info.videos.length;
+    let count = 0;
+
+    if (info.chapters) {
+        // Chapter-wise structure - সব chapter এর সব video count করো
+        Object.values(info.chapters).forEach(chapter => {
+            count += chapter.academic.length + chapter.basic.length + chapter.oneshot.length;
+        });
+    } else if (info.videos) {
+        // Direct videos
+        count = info.videos.length;
+    }
 
     return `
         <button class="subject-card sound-btn" data-sound="open" onclick="openSubject('${classKey}', '${escapeQuotes(subject)}')">
@@ -478,7 +561,9 @@ function createSubjectCard(classKey, subject, info) {
 
 
 /* =========================================================
-   OPEN SUBJECT - Video list দেখাবে
+   OPEN SUBJECT - Smart routing
+   - Chapter structure থাকলে → Chapter List
+   - Videos array থাকলে → সরাসরি Video List
 ========================================================= */
 
 function openSubject(classKey, subject) {
@@ -487,32 +572,213 @@ function openSubject(classKey, subject) {
     selectedSubject = subject;
 
     const data = educationData[classKey].subjects[subject];
-    const classTitle = educationData[classKey].title;
-    const classSubtitle = educationData[classKey].subtitle;
+
+    if (data.chapters) {
+        // Chapter-wise structure → Chapter List দেখাও
+        showChapterList(classKey, subject);
+    } else {
+        // Direct videos → Video List দেখাও
+        const classTitle = educationData[classKey].title;
+        const classSubtitle = educationData[classKey].subtitle;
+
+        showVideoList(
+            `${classTitle} • ${subject}`,
+            classSubtitle,
+            data.videos,
+            "showSubjectSelection"
+        );
+    }
+}
+
+
+/* =========================================================
+   SHOW CHAPTER LIST - Subject এর সব chapter দেখাবে
+========================================================= */
+
+function showChapterList(classKey, subject) {
+    currentLevel = "chapters";
+    selectedClass = classKey;
+    selectedSubject = subject;
+    selectedChapter = null;
+
+    const data = educationData[classKey].subjects[subject];
+    const container = document.getElementById("classContent");
+
+    const chapters = Object.entries(data.chapters);
+    const chapterCount = chapters.length;
+
+    container.innerHTML = `
+        <div class="inner-navigation">
+            <button onclick="showSubjectSelection('${classKey}')" class="back-button sound-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Subjects
+            </button>
+        </div>
+
+        <div class="selection-header reveal">
+            <div class="selection-icon">
+                <i class="fa-solid ${data.icon}"></i>
+            </div>
+            <div>
+                <span>${subject}</span>
+                <h2>Chapter List</h2>
+                <p>${educationData[classKey].title} - ${subject} এর ${chapterCount}টি অধ্যায়</p>
+            </div>
+        </div>
+
+        <div class="chapter-grid">
+            ${chapters.map(([chapter, info]) =>
+                createChapterCard(classKey, subject, chapter, info)
+            ).join("")}
+        </div>
+    `;
+
+    activateRevealElements();
+}
+
+
+/* =========================================================
+   CREATE CHAPTER CARD
+========================================================= */
+
+function createChapterCard(classKey, subject, chapter, info) {
+    const totalVideos = info.academic.length + info.basic.length + info.oneshot.length;
+
+    return `
+        <button class="chapter-card sound-btn" data-sound="open" onclick="showClassTypeOptions('${classKey}', '${escapeQuotes(subject)}', '${escapeQuotes(chapter)}')">
+            <div class="chapter-card-glow"></div>
+            <div class="chapter-card-top">
+                <div class="chapter-icon">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <span class="chapter-type">CHAPTER</span>
+            </div>
+            <div class="chapter-card-content">
+                <h3>${chapter}</h3>
+                <p>${totalVideos > 0 ? `${totalVideos}টি ভিডিও available` : "ভিডিও শিগগিরই আসছে"}</p>
+            </div>
+            <div class="chapter-card-bottom">
+                <span>View Classes</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </button>
+    `;
+}
+
+
+/* =========================================================
+   SHOW CLASS TYPE OPTIONS - Academic/Basic/Oneshot
+========================================================= */
+
+function showClassTypeOptions(classKey, subject, chapter) {
+    currentLevel = "classTypes";
+    selectedClass = classKey;
+    selectedSubject = subject;
+    selectedChapter = chapter;
+
+    const data = educationData[classKey].subjects[subject].chapters[chapter];
+    const container = document.getElementById("classContent");
+
+    container.innerHTML = `
+        <div class="inner-navigation">
+            <button onclick="showChapterList('${classKey}', '${escapeQuotes(subject)}')" class="back-button sound-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Chapters
+            </button>
+        </div>
+
+        <div class="selection-header reveal">
+            <div class="selection-icon">
+                <i class="fa-solid fa-list-check"></i>
+            </div>
+            <div>
+                <span>${subject} — ${chapter}</span>
+                <h2>Class Type নির্বাচন করো</h2>
+                <p>তোমার পছন্দমতো class type বেছে নাও</p>
+            </div>
+        </div>
+
+        <div class="class-type-grid">
+            ${createClassTypeCard("academic", "Academic Class", "fa-graduation-cap", "বিস্তারিত ও গভীর পাঠ", data.academic.length)}
+            ${createClassTypeCard("basic", "Basic Class", "fa-lightbulb", "সহজ ও মৌলিক পাঠ", data.basic.length)}
+            ${createClassTypeCard("oneshot", "Oneshot Class", "fa-bolt", "দ্রুত সম্পূর্ণ রিভিশন", data.oneshot.length)}
+        </div>
+    `;
+
+    activateRevealElements();
+}
+
+
+/* =========================================================
+   CREATE CLASS TYPE CARD
+========================================================= */
+
+function createClassTypeCard(type, title, icon, description, videoCount) {
+    return `
+        <button class="class-type-card sound-btn" data-sound="open" onclick="openClassType('${type}')">
+            <div class="class-type-icon">
+                <i class="fa-solid ${icon}"></i>
+            </div>
+            <div class="class-type-content">
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <span class="video-badge">${videoCount > 0 ? `${videoCount}টি ভিডিও` : "শিগগিরই আসছে"}</span>
+            </div>
+            <div class="class-type-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </button>
+    `;
+}
+
+
+/* =========================================================
+   OPEN CLASS TYPE - Selected type এর videos দেখাবে
+========================================================= */
+
+function openClassType(classType) {
+    playUISound("success");
+
+    const data = educationData[selectedClass].subjects[selectedSubject].chapters[selectedChapter];
+    const videos = data[classType];
+
+    const typeNames = {
+        academic: "Academic Class",
+        basic: "Basic Class",
+        oneshot: "Oneshot Class"
+    };
 
     showVideoList(
-        `${classTitle} • ${subject}`,
-        classSubtitle,
-        data.videos,
-        true
+        `${selectedSubject} — ${selectedChapter} • ${typeNames[classType]}`,
+        educationData[selectedClass].title,
+        videos,
+        "showClassTypeOptions"
     );
 }
 
 
 /* =========================================================
-   VIDEO LIST
+   VIDEO LIST - Smart back navigation
 ========================================================= */
 
-function showVideoList(title, subtitle, videos, showBack) {
+function showVideoList(title, subtitle, videos, backFunction) {
     currentLevel = "videos";
 
     const container = document.getElementById("classContent");
 
+    // Back button - কোথায় ফিরবে
+    let backAction;
+    if (backFunction === "showClassTypeOptions") {
+        backAction = `showClassTypeOptions('${selectedClass}', '${escapeQuotes(selectedSubject)}', '${escapeQuotes(selectedChapter)}')`;
+    } else {
+        backAction = `showSubjectSelection('${selectedClass}')`;
+    }
+
     container.innerHTML = `
         <div class="inner-navigation">
-            <button onclick="showSubjectSelection('${selectedClass}')" class="back-button sound-btn">
+            <button onclick="${backAction}" class="back-button sound-btn">
                 <i class="fa-solid fa-arrow-left"></i>
-                Subjects
+                Back
             </button>
         </div>
 
@@ -536,7 +802,7 @@ function showVideoList(title, subtitle, videos, showBack) {
                 <div class="empty-icon">
                     <i class="fa-solid fa-video-slash"></i>
                 </div>
-                <h3>এই subject-এর video এখনো নেই</h3>
+                <h3>এই section-এ video এখনো নেই</h3>
                 <p>নতুন video যুক্ত হলে এখানে দেখা যাবে।</p>
             </div>`
         }
@@ -733,7 +999,9 @@ function playUISound(type = "click") {
 function createRipple(element, event) {
     if (element.classList.contains("class-card") ||
         element.classList.contains("subject-card") ||
-        element.classList.contains("video-card")) {
+        element.classList.contains("video-card") ||
+        element.classList.contains("chapter-card") ||
+        element.classList.contains("class-type-card")) {
         return;
     }
 
