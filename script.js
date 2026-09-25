@@ -635,3 +635,52 @@ if (vmEl) {
         }
     }
 })();
+// FINAL SOUND FIX - সব click এ sound play হবে
+document.addEventListener("click", function(e) {
+    var el = e.target;
+    
+    // খুঁজে বের করো click হওয়া element টা আসলে কোন button/card/link
+    while (el && el !== document.body) {
+        // যদি এটা soundToggle button হয়, তাহলে কিছু করো না
+        if (el.id === "soundToggle") return;
+        
+        // যদি এটা কোনো clickable element হয়
+        if (el.tagName === "BUTTON" || 
+            el.tagName === "A" || 
+            el.classList.contains("class-card") ||
+            el.classList.contains("subject-card") ||
+            el.classList.contains("video-card") ||
+            el.classList.contains("chapter-card") ||
+            el.classList.contains("class-type-card") ||
+            el.classList.contains("premium-button") ||
+            el.classList.contains("nav-link") ||
+            el.classList.contains("brand") ||
+            el.classList.contains("back-button") ||
+            el.classList.contains("back-to-top") ||
+            el.classList.contains("floating-youtube") ||
+            el.classList.contains("modal-close") ||
+            el.classList.contains("sound-btn")) {
+            
+            // Sound type determine করো
+            var soundType = "soft";
+            if (el.dataset.sound) {
+                soundType = el.dataset.sound;
+            } else if (el.classList.contains("premium-button") || 
+                       el.classList.contains("floating-youtube") ||
+                       el.classList.contains("youtube-nav")) {
+                soundType = "success";
+            } else if (el.classList.contains("class-card") ||
+                       el.classList.contains("subject-card") ||
+                       el.classList.contains("chapter-card") ||
+                       el.classList.contains("class-type-card")) {
+                soundType = "open";
+            }
+            
+            // Sound play করো
+            playUISound(soundType);
+            return;
+        }
+        
+        el = el.parentElement;
+    }
+});
