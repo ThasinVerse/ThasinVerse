@@ -1,4 +1,4 @@
---- script.js (原始)
+
 /* =========================================================
    THASINVERSE PREMIUM LEARNING ENGINE
    Version: 6.0 (Final - All Features Fixed)
