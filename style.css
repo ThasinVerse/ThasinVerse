@@ -4944,3 +4944,200 @@ a {
         padding: 20px;
     }
 }
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #03040a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
+
+.loading-logo-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+}
+
+.loading-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 16px;
+    z-index: 2;
+    animation: loadingPulse 2s ease-in-out infinite;
+}
+
+.loading-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #6366f1;
+    border-right-color: #38bdf8;
+    animation: loadingSpin 1.2s linear infinite;
+}
+
+.loading-ring.ring-2 {
+    inset: 8px;
+    border-top-color: #8b5cf6;
+    border-right-color: #22d3ee;
+    animation-duration: 1.8s;
+    animation-direction: reverse;
+}
+
+.loading-ring.ring-3 {
+    inset: 16px;
+    border-top-color: #a78bfa;
+    border-right-color: #67e8f9;
+    animation-duration: 2.4s;
+}
+
+@keyframes loadingSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loadingPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.08);
+        opacity: 0.85;
+    }
+}
+
+.loading-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.loading-text strong {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: white;
+}
+
+.loading-text span {
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #64748b;
+}
+
+.loading-bar-wrap {
+    width: 180px;
+    height: 3px;
+    background: rgba(255,255,255,.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loading-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #6366f1, #38bdf8, #8b5cf6);
+    animation: loadingProgress 2.2s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0; }
+    30% { width: 40%; }
+    60% { width: 70%; }
+    100% { width: 100%; }
+}
+
+
+/* =========================================================
+   SCROLL REVEAL ANIMATIONS (Different Types)
+========================================================= */
+
+/* Default - Fade Up */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+        opacity 0.8s cubic-bezier(.2,.8,.2,1),
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade Left */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition:
+        opacity 0.8s cubic-bezier(.2,.8,.2,1),
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fade Right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition:
+        opacity 0.8s cubic-bezier(.2,.8,.2,1),
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale Up */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.85);
+    transition:
+        opacity 0.8s cubic-bezier(.2,.8,.2,1),
+        transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger delay for grid items */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
