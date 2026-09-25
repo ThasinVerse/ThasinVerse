@@ -33,48 +33,7 @@
 
 
 <!-- =========================================================
-     LOADING SCREEN
-========================================================= -->
-
-<div id="loadingScreen" class="loading-screen">
-
-    <div class="loading-content">
-
-        <div class="loading-logo-wrap">
-
-            <div class="loading-ring"></div>
-
-            <div class="loading-ring ring-2"></div>
-
-            <div class="loading-ring ring-3"></div>
-
-            <img src="assets/logo.png"
-                 alt="ThasinVerse"
-                 class="loading-logo">
-
-        </div>
-
-        <div class="loading-text">
-
-            <strong>ThasinVerse</strong>
-
-            <span>PREMIUM SCIENCE LEARNING</span>
-
-        </div>
-
-        <div class="loading-bar-wrap">
-
-            <div class="loading-bar"></div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     BACKGROUND SYSTEM
+     BACKGROUND SYSTEM (Static - No Animation)
 ========================================================= -->
 
 <div class="ambient-background">
@@ -246,7 +205,7 @@
 
         <!-- LEFT SIDE -->
 
-        <div class="hero-content reveal">
+        <div class="hero-content">
 
             <div class="hero-badge">
 
@@ -368,9 +327,9 @@
         </div>
 
 
-        <!-- RIGHT SIDE 3D LOGO -->
+        <!-- RIGHT SIDE 3D LOGO (Static) -->
 
-        <div class="hero-visual reveal">
+        <div class="hero-visual">
 
             <div class="hero-orbit orbit-a"></div>
 
@@ -495,7 +454,7 @@
         <div class="stats-grid">
 
 
-            <div class="stat-card reveal">
+            <div class="stat-card">
 
                 <div class="stat-icon">
                     <i class="fa-solid fa-users"></i>
@@ -514,7 +473,7 @@
             </div>
 
 
-            <div class="stat-card reveal">
+            <div class="stat-card">
 
                 <div class="stat-icon">
                     <i class="fa-brands fa-youtube"></i>
@@ -533,7 +492,7 @@
             </div>
 
 
-            <div class="stat-card reveal">
+            <div class="stat-card">
 
                 <div class="stat-icon">
                     <i class="fa-solid fa-book-open"></i>
@@ -550,7 +509,7 @@
             </div>
 
 
-            <div class="stat-card reveal">
+            <div class="stat-card">
 
                 <div class="stat-icon">
                     <i class="fa-solid fa-graduation-cap"></i>
@@ -584,7 +543,7 @@
     <div class="section-container">
 
 
-        <div class="section-heading reveal">
+        <div class="section-heading">
 
             <div class="section-kicker">
 
@@ -643,7 +602,7 @@
     <div class="section-container">
 
 
-        <div class="founder-card reveal">
+        <div class="founder-card">
 
 
             <div class="founder-image-area">
@@ -749,7 +708,7 @@
 
 <section class="cta-section">
 
-    <div class="cta-container reveal">
+    <div class="cta-container">
 
         <div class="cta-glow"></div>
 
@@ -983,7 +942,7 @@
 </html>
 
 
-
++++ index.html (修改后)
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -1012,66 +971,9 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- LOADING SCREEN INLINE STYLE -->
-    <style>
-    #loadingScreen {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        z-index: 999999 !important;
-        background: #03040a !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    </style>
 </head>
 
 <body>
-
-
-<!-- =========================================================
-     LOADING SCREEN
-========================================================= -->
-
-<div id="loadingScreen" class="loading-screen">
-
-    <div class="loading-content">
-
-        <div class="loading-logo-wrap">
-
-            <div class="loading-ring"></div>
-
-            <div class="loading-ring ring-2"></div>
-
-            <div class="loading-ring ring-3"></div>
-
-            <img src="assets/logo.png"
-                 alt="ThasinVerse"
-                 class="loading-logo">
-
-        </div>
-
-        <div class="loading-text">
-
-            <strong>ThasinVerse</strong>
-
-            <span>PREMIUM SCIENCE LEARNING</span>
-
-        </div>
-
-        <div class="loading-bar-wrap">
-
-            <div class="loading-bar"></div>
-
-        </div>
-
-    </div>
-
-</div>
 
 
 <!-- =========================================================
@@ -1979,29 +1881,6 @@
 ========================================================= -->
 
 <script src="script.js"></script>
-
-
-<!-- =========================================================
-     LOADING SCREEN - INLINE SCRIPT (CSS/JS এর উপর depend করে না)
-========================================================= -->
-
-<script>
-(function() {
-    var ls = document.getElementById("loadingScreen");
-    if (!ls) return;
-
-    setTimeout(function() {
-        ls.style.transition = "opacity 0.8s ease";
-        ls.style.opacity = "0";
-        ls.style.pointerEvents = "none";
-
-        setTimeout(function() {
-            ls.style.display = "none";
-            ls.parentNode.removeChild(ls);
-        }, 900);
-    }, 2500);
-})();
-</script>
 
 </body>
 </html>
