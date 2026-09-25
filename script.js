@@ -466,10 +466,55 @@ function setupSoundSystem() {
         toggle.addEventListener("click", function() {
             soundEnabled = !soundEnabled;
             updateSoundBtn();
+            if (soundEnabled) playUISound("success");
         });
     }
+    
+    document.addEventListener("click", function(e) {
+        var el = e.target.closest(".sound-btn");
+        if (!el || el.id === "soundToggle") return;
+        var soundType = el.dataset.sound || "click";
+        playUISound(soundType);
+    });
 }
-
+function playUISound(type) {
+    if (!soundEnabled) return;
+    if (!type) type = "click";
+    
+    try {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+        
+        var now = audioContext.currentTime;
+        var osc = audioContext.createOscillator();
+        var gn = audioContext.createGain();
+        var freq = 440;
+        var dur = 0.12;
+        
+        if (type === "success") { freq = 680; dur = 0.18; }
+        else if (type === "open") { freq = 560; dur = 0.14; }
+        else if (type === "soft") { freq = 380; dur = 0.08; }
+        
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.25, now + dur);
+        
+        gn.gain.setValueAtTime(0.0001, now);
+        gn.gain.exponentialRampToValueAtTime(0.045, now + 0.015);
+        gn.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+        
+        osc.connect(gn);
+        gn.connect(audioContext.destination);
+        osc.start(now);
+        osc.stop(now + dur + 0.02);
+    } catch (err) {
+        console.log("Audio unavailable");
+    }
+}
 function updateSoundBtn() {
     var b = document.getElementById("soundToggle");
     if (!b) return;
