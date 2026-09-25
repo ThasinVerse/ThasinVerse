@@ -196,12 +196,14 @@ function initializeWebsite() {
 function setupLoadingScreen() {
     var loadingScreen = document.getElementById("loadingScreen");
     if (!loadingScreen) return;
-
+    
     setTimeout(function() {
-        loadingScreen.className = "loading-screen hidden";
+        loadingScreen.style.transition = "opacity 0.8s ease";
+        loadingScreen.style.opacity = "0";
+        
         setTimeout(function() {
             loadingScreen.style.display = "none";
-        }, 1000);
+        }, 900);
     }, 2500);
 }
 
