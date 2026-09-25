@@ -2096,26 +2096,15 @@ function setupLoadingScreen() {
 
     if (!loadingScreen) return;
 
-    const minLoadTime = 2500;
+    // সরাসরি 2.5 second পর hide হবে
+    setTimeout(() => {
+        loadingScreen.classList.add("hidden");
 
-    window.addEventListener("load", () => {
+        // Animation শেষে DOM থেকে remove
         setTimeout(() => {
-            loadingScreen.classList.add("hidden");
-
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 800);
-        }, minLoadTime);
-    });
-
-    if (document.readyState === "complete") {
-        setTimeout(() => {
-            loadingScreen.classList.add("hidden");
-            setTimeout(() => {
-                loadingScreen.remove();
-            }, 800);
-        }, minLoadTime);
-    }
+            loadingScreen.remove();
+        }, 800);
+    }, 2500);
 }
 
 
