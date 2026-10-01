@@ -1,4 +1,4 @@
-/* ThasinVerse Premium Learning Engine - Version 8.0 */
+/* ThasinVerse Premium Learning Engine - Version 9.0 (Sound Fixed) */
 
 var educationData = {
     "class6": {
@@ -172,6 +172,68 @@ var selectedChapter = null;
 var soundEnabled = true;
 var audioContext = null;
 
+/* ============================================
+   🔊 UNIFIED SOUND SYSTEM (Fixed Version)
+   ============================================ */
+
+function getAudioCtx() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioContext.state === "suspended") {
+        audioContext.resume();
+    }
+    return audioContext;
+}
+
+// এটাই মূল sound function — সব জায়গা থেকে এটাই call হবে
+function playUISound(type) {
+    if (!soundEnabled) return;
+    try {
+        var ctx = getAudioCtx();
+        var now = ctx.currentTime;
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        var freq = 440;
+        var dur = 0.12;
+        var vol = 0.05;
+
+        if (type === "success") {
+            freq = 680; dur = 0.2; vol = 0.06;
+        } else if (type === "open") {
+            freq = 560; dur = 0.16; vol = 0.05;
+        } else if (type === "soft") {
+            freq = 380; dur = 0.08; vol = 0.035;
+        } else if (type === "click") {
+            freq = 440; dur = 0.1; vol = 0.04;
+        } else if (type === "counter") {
+            // Counter animation এর জন্য special ascending sound
+            freq = 300; dur = 1.8; vol = 0.03;
+        } else if (type === "nav") {
+            freq = 500; dur = 0.1; vol = 0.04;
+        }
+
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.3, now + dur);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(vol, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + dur + 0.02);
+    } catch (err) {
+        // silently fail
+    }
+}
+
+/* ============================================
+   🎯 INITIALIZATION
+   ============================================ */
+
 document.addEventListener("DOMContentLoaded", function() {
     var yearEl = document.getElementById("currentYear");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -188,10 +250,15 @@ document.addEventListener("DOMContentLoaded", function() {
 function showHome() { currentLevel = "home"; }
 
 function openClasses() {
+    playUISound("success");
     var el = document.getElementById("classes");
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     setTimeout(function() { showClasses(); }, 300);
 }
+
+/* ============================================
+   📚 CLASS / SUBJECT / CHAPTER NAVIGATION
+   ============================================ */
 
 function showClasses() {
     currentLevel = "classes";
@@ -230,6 +297,7 @@ function makeClassCard(key, title, sub, type, icon, action) {
 }
 
 function selectClass(classKey) {
+    playUISound("open"); // ✅ Class select করলে sound হবে
     selectedClass = classKey;
     var d = educationData[classKey];
     if (!d) return;
@@ -289,6 +357,7 @@ function makeSubjectCard(classKey, subject, info) {
 }
 
 function openSubject(classKey, subject) {
+    playUISound("open"); // ✅ Subject select করলে sound হবে
     selectedClass = classKey;
     selectedSubject = subject;
     var d = educationData[classKey].subjects[subject];
@@ -343,6 +412,7 @@ function makeChapterCard(classKey, subject, chapter, info) {
 }
 
 function showClassTypeOptions(classKey, subject, chapter) {
+    playUISound("open"); // ✅ Chapter select করলে sound হবে
     currentLevel = "classTypes";
     selectedClass = classKey;
     selectedSubject = subject;
@@ -377,6 +447,7 @@ function makeTypeCard(type, title, icon, desc, vc) {
 }
 
 function openClassType(classType) {
+    playUISound("success"); // ✅ Class type select করলে sound হবে
     var d = educationData[selectedClass].subjects[selectedSubject].chapters[selectedChapter];
     var videos = d[classType];
     var names = { academic: "Academic Class", basic: "Basic Class", oneshot: "Oneshot Class" };
@@ -445,6 +516,7 @@ function getYTId(url) {
 }
 
 function openVideoModal(url) {
+    playUISound("success"); // ✅ Video open করলে sound হবে
     var vid = getYTId(url);
     if (!vid) { window.open(url, "_blank", "noopener,noreferrer"); return; }
     var modal = document.getElementById("videoModal");
@@ -454,11 +526,16 @@ function openVideoModal(url) {
 }
 
 function closeVideoModal() {
+    playUISound("soft"); // ✅ Modal close করলে sound হবে
     var modal = document.getElementById("videoModal");
     var frame = document.getElementById("youtubeFrame");
     frame.src = "";
     modal.classList.remove("active");
 }
+
+/* ============================================
+   🔊 SOUND SYSTEM SETUP
+   ============================================ */
 
 function setupSoundSystem() {
     var toggle = document.getElementById("soundToggle");
@@ -466,6 +543,9 @@ function setupSoundSystem() {
         toggle.addEventListener("click", function() {
             soundEnabled = !soundEnabled;
             updateSoundBtn();
+            if (soundEnabled) {
+                playUISound("success");
+            }
         });
     }
 }
@@ -480,11 +560,16 @@ function updateSoundBtn() {
     }
 }
 
+/* ============================================
+   📱 MOBILE MENU
+   ============================================ */
+
 function setupMobileMenu() {
     var btn = document.getElementById("mobileMenuButton");
     var menu = document.getElementById("mobileMenu");
     if (!btn || !menu) return;
     btn.addEventListener("click", function() {
+        playUISound("soft");
         menu.classList.toggle("active");
         var icon = btn.querySelector("i");
         if (menu.classList.contains("active")) {
@@ -496,12 +581,17 @@ function setupMobileMenu() {
     var links = menu.querySelectorAll("a");
     for (var i = 0; i < links.length; i++) {
         links[i].addEventListener("click", function() {
+            playUISound("nav");
             menu.classList.remove("active");
             var icon = btn.querySelector("i");
             icon.className = "fa-solid fa-bars";
         });
     }
 }
+
+/* ============================================
+   📊 SCROLL PROGRESS
+   ============================================ */
 
 function setupScrollProgress() {
     var p = document.getElementById("scrollProgress");
@@ -513,6 +603,10 @@ function setupScrollProgress() {
     }, { passive: true });
 }
 
+/* ============================================
+   ⬆️ BACK TO TOP
+   ============================================ */
+
 function setupBackToTop() {
     var btn = document.getElementById("backToTop");
     window.addEventListener("scroll", function() {
@@ -523,14 +617,20 @@ function setupBackToTop() {
         }
     }, { passive: true });
     btn.addEventListener("click", function() {
+        playUISound("soft");
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
+
+/* ============================================
+   🧭 NAVIGATION
+   ============================================ */
 
 function setupNavigation() {
     var links = document.querySelectorAll(".nav-link");
     for (var i = 0; i < links.length; i++) {
         links[i].addEventListener("click", function() {
+            playUISound("nav");
             for (var j = 0; j < links.length; j++) {
                 links[j].classList.remove("active");
             }
@@ -541,6 +641,10 @@ function setupNavigation() {
         });
     }
 }
+
+/* ============================================
+   ✨ REVEAL ANIMATION
+   ============================================ */
 
 function setupRevealAnimation() {
     activateReveal();
@@ -567,6 +671,10 @@ function activateReveal() {
     }
 }
 
+/* ============================================
+   🔢 COUNTER ANIMATION (WITH SOUND!)
+   ============================================ */
+
 function setupCounters() {
     var ctrs = document.querySelectorAll("[data-counter]");
     var obs = new IntersectionObserver(function(entries) {
@@ -574,6 +682,10 @@ function setupCounters() {
             if (!entries[i].isIntersecting) return;
             var el = entries[i].target;
             var tgt = Number(el.dataset.counter);
+
+            // ✅ Counter শুরু হওয়ার সাথে সাথে sound play হবে
+            playCounterSound();
+
             animCounter(el, tgt);
             obs.unobserve(el);
         }
@@ -597,6 +709,10 @@ function animCounter(el, target) {
     requestAnimationFrame(upd);
 }
 
+/* ============================================
+   🛠️ UTILITY FUNCTIONS
+   ============================================ */
+
 function escH(v) {
     return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
@@ -604,6 +720,10 @@ function escH(v) {
 function escQ(v) {
     return String(v).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 }
+
+/* ============================================
+   ⌨️ KEYBOARD & MODAL EVENTS
+   ============================================ */
 
 document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") closeVideoModal();
@@ -615,38 +735,22 @@ if (vmEl) {
         if (e.target.classList.contains("video-modal")) closeVideoModal();
     });
 }
-// SOUND FIX - সব button এ automatically sound-btn class add করবে
-(function() {
-    var allButtons = document.querySelectorAll(
-        "button, .premium-button, .nav-link, .brand, .youtube-nav, .sound-control, .floating-youtube, .back-to-top, .modal-close, .footer-socials a, .mobile-menu a, .class-card, .subject-card, .video-card, .chapter-card, .class-type-card, .back-button"
-    );
-    
-    for (var i = 0; i < allButtons.length; i++) {
-        var el = allButtons[i];
-        if (!el.classList.contains("sound-btn")) {
-            el.classList.add("sound-btn");
-        }
-        if (!el.dataset.sound) {
-            if (el.classList.contains("premium-button") || el.classList.contains("youtube-nav")) {
-                el.dataset.sound = "success";
-            } else {
-                el.dataset.sound = "soft";
-            }
-        }
-    }
-})();
-// FINAL SOUND FIX - সব click এ sound play হবে
+
+/* ============================================
+   🎵 GLOBAL CLICK SOUND (সব বাটনে sound)
+   ============================================ */
+
 document.addEventListener("click", function(e) {
     var el = e.target;
-    
+
     // খুঁজে বের করো click হওয়া element টা আসলে কোন button/card/link
     while (el && el !== document.body) {
-        // যদি এটা soundToggle button হয়, তাহলে কিছু করো না
+        // soundToggle button হলে আলাদা handler আছে, এখানে skip
         if (el.id === "soundToggle") return;
-        
+
         // যদি এটা কোনো clickable element হয়
-        if (el.tagName === "BUTTON" || 
-            el.tagName === "A" || 
+        if (el.tagName === "BUTTON" ||
+            el.tagName === "A" ||
             el.classList.contains("class-card") ||
             el.classList.contains("subject-card") ||
             el.classList.contains("video-card") ||
@@ -660,12 +764,12 @@ document.addEventListener("click", function(e) {
             el.classList.contains("floating-youtube") ||
             el.classList.contains("modal-close") ||
             el.classList.contains("sound-btn")) {
-            
+
             // Sound type determine করো
             var soundType = "soft";
             if (el.dataset.sound) {
                 soundType = el.dataset.sound;
-            } else if (el.classList.contains("premium-button") || 
+            } else if (el.classList.contains("premium-button") ||
                        el.classList.contains("floating-youtube") ||
                        el.classList.contains("youtube-nav")) {
                 soundType = "success";
@@ -675,12 +779,12 @@ document.addEventListener("click", function(e) {
                        el.classList.contains("class-type-card")) {
                 soundType = "open";
             }
-            
-            // Sound play করো
+
+            // ✅ Sound play করো (এখন playUISound properly defined!)
             playUISound(soundType);
             return;
         }
-        
+
         el = el.parentElement;
     }
 });
