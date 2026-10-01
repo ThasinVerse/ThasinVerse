@@ -230,6 +230,34 @@ function playUISound(type) {
     }
 }
 
+function playCounterSound() {
+    if (!soundEnabled) return;
+    try {
+        var ctx = getAudioCtx();
+        var now = ctx.currentTime;
+
+        for (var i = 0; i < 3; i++) {
+            var osc = ctx.createOscillator();
+            var gain = ctx.createGain();
+            var baseFreq = 200 + (i * 150);
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(baseFreq, now);
+            osc.frequency.exponentialRampToValueAtTime(baseFreq * 3, now + 1.6);
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.025, now + 0.1);
+            gain.gain.setValueAtTime(0.025, now + 1.2);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + (i * 0.05));
+            osc.stop(now + 2);
+        }
+    } catch (err) {}
+}
+
 /* ============================================
    🎯 INITIALIZATION
    ============================================ */
