@@ -230,31 +230,58 @@ function playUISound(type) {
     }
 }
 
+// ✅ NEW Futuristic Counter Sound
+// এই function টা তোমার script.js এ playCounterSound() এর জায়গায় বসাও
+
 function playCounterSound() {
     if (!soundEnabled) return;
     try {
         var ctx = getAudioCtx();
         var now = ctx.currentTime;
 
-        for (var i = 0; i < 3; i++) {
-            var osc = ctx.createOscillator();
-            var gain = ctx.createGain();
-            var baseFreq = 200 + (i * 150);
+        // 1. Main rising sweep (sci-fi data loading sound)
+        var sweep = ctx.createOscillator();
+        var sweepGain = ctx.createGain();
+        sweep.type = "sawtooth";
+        sweep.frequency.setValueAtTime(100, now);
+        sweep.frequency.exponentialRampToValueAtTime(2000, now + 0.4);
+        sweepGain.gain.setValueAtTime(0.0001, now);
+        sweepGain.gain.exponentialRampToValueAtTime(0.03, now + 0.05);
+        sweepGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+        sweep.connect(sweepGain);
+        sweepGain.connect(ctx.destination);
+        sweep.start(now);
+        sweep.stop(now + 0.5);
 
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(baseFreq, now);
-            osc.frequency.exponentialRampToValueAtTime(baseFreq * 3, now + 1.6);
-
-            gain.gain.setValueAtTime(0.0001, now);
-            gain.gain.exponentialRampToValueAtTime(0.025, now + 0.1);
-            gain.gain.setValueAtTime(0.025, now + 1.2);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
-
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(now + (i * 0.05));
-            osc.stop(now + 2);
+        // 2. Digital blips (data processing sound)
+        for (var i = 0; i < 5; i++) {
+            var blip = ctx.createOscillator();
+            var blipGain = ctx.createGain();
+            blip.type = "square";
+            blip.frequency.setValueAtTime(800 + (i * 200), now + (i * 0.08));
+            blipGain.gain.setValueAtTime(0.0001, now + (i * 0.08));
+            blipGain.gain.exponentialRampToValueAtTime(0.02, now + (i * 0.08) + 0.01);
+            blipGain.gain.exponentialRampToValueAtTime(0.0001, now + (i * 0.08) + 0.05);
+            blip.connect(blipGain);
+            blipGain.connect(ctx.destination);
+            blip.start(now + (i * 0.08));
+            blip.stop(now + (i * 0.08) + 0.06);
         }
+
+        // 3. Final confirmation tone
+        var confirm = ctx.createOscillator();
+        var confirmGain = ctx.createGain();
+        confirm.type = "sine";
+        confirm.frequency.setValueAtTime(1200, now + 0.45);
+        confirm.frequency.setValueAtTime(1600, now + 0.5);
+        confirmGain.gain.setValueAtTime(0.0001, now + 0.45);
+        confirmGain.gain.exponentialRampToValueAtTime(0.04, now + 0.47);
+        confirmGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+        confirm.connect(confirmGain);
+        confirmGain.connect(ctx.destination);
+        confirm.start(now + 0.45);
+        confirm.stop(now + 0.65);
+
     } catch (err) {}
 }
 
