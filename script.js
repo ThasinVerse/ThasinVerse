@@ -14,7 +14,8 @@ var educationData = {
                     { title: "আলোর প্রতিসরণ | আলোর ঘটনা | Lecture 03", url: "https://youtu.be/sDnBbMbcZ1c" },
                     { title: "💈বস্তু কেন রঙিন দেখি আলোর ঘটনা : ষষ্ঠ শ্রেণী বিজ্ঞান অধ্যায় ৯ | Lecture 04", url: "https://youtu.be/ZJwTrGQYPjs?si=a_qjUCC8NlSeA2QW" },
                     { title: "🔮 অবাস্তব বস্তু কিভাবে দেখি 🤔 আলোর ঘটনা : ষষ্ঠ শ্রেণী বিজ্ঞান অধ্যায় ৯ | Lecture 05", url: "https://youtu.be/4zcRICKZ7TU?si=Yv4e7ia1Cb9WViIF" },
-                    { title: "🔮 প্রতিবিম্ব নিয়ে যাবতীয় ⚔️ আলোর ঘটনা : ষষ্ঠ শ্রেণী বিজ্ঞান অধ্যায় ৯ | Lecture 06", url: "https://youtu.be/U4rHfCoIX7o?si=EplCeEWi-62GMYxz" }
+                    { title: "🔮 প্রতিবিম্ব নিয়ে যাবতীয় ⚔️ আলোর ঘটনা : ষষ্ঠ শ্রেণী বিজ্ঞান অধ্যায় ৯ | Lecture 06", url: "https://youtu.be/U4rHfCoIX7o?si=EplCeEWi-62GMYxz" },
+                    { title: "🔮 পেরিস্কোপ 🔮 আলোর ঘটনা : ষষ্ঠ শ্রেণী বিজ্ঞান অধ্যায় ৯ | Lecture 07", url: "https://youtu.be/UBm9MqWunms?si=yvojmsJxpQjnDblh" }
                 ]
             },
             "গণিত": { icon: "fa-square-root-variable", videos: [] },
